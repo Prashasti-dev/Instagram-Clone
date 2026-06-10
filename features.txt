@@ -1,0 +1,8 @@
+Authentication
+=>login,logout
+
+Post
+=>create, delete, update
+
+Users
+=>followers, following
