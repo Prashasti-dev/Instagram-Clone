@@ -1,9 +1,12 @@
 const express=require('express')
 const postRouter=express.Router()
-
 const postController=require('../controllers/post.controller')
 const multer=require('multer')
 const upload=multer({storage:multer.memoryStorage()})
+const identifyuser=require("../middlewares/auth.middleware")
+
+
+
 /**
  * POST/api/posts [protected api]  jiske pass token nhi hai wo cant acces api
  * 
@@ -11,15 +14,15 @@ const upload=multer({storage:multer.memoryStorage()})
  */
 //FILE HANDLING
 
-postRouter.post("/",upload.single("image"),postController.createPostController)
+postRouter.post("/",upload.single("image"),identifyuser,postController.createPostController)
 
 // GET/api/posts[protected]
-postRouter.get("/",postController.getPostController)
+postRouter.get("/",identifyuser,postController.getPostController)
 
 /**
  * GET/api/posts/details/:postId
  * -return a detail about specific post with id
  * -check whteher the post belongs to user that is requesting 
  */
-postRouter.get("/details/:postId",postController.getPostDetailsController)
+postRouter.get("/details/:postId",identifyuser,postController.getPostDetailsController)
 module.exports=postRouter
