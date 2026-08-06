@@ -25,4 +25,13 @@ postRouter.get("/",identifyuser,postController.getPostController)
  * -check whteher the post belongs to user that is requesting 
  */
 postRouter.get("/details/:postId",identifyuser,postController.getPostDetailsController)
+
+
+/**
+ * @route POST/api/posts/like/:postid
+ * @description like a post with the id provided in the request params 
+ */
+
+postRouter.post("/like/:postId",identifyuser,postController.likePostController)
+
 module.exports=postRouter

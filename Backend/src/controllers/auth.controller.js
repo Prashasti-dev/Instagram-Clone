@@ -50,7 +50,8 @@ const hash=await bcrypt.hash(password,10)
 
 //create token on base of id
     const token=jwt.sign({
-        id:user._id
+        id:user._id,
+        user:user.username
     },
     process.env.JWT_SECRET,{expiresIn:'1d'}
 )
@@ -107,7 +108,11 @@ async function loginController(req,res) {
     //agar login ho gya toh send token
 
     const token= jwt.sign(
-        {id:user._id},
+        {
+            id:user._id,
+            username:user.username
+
+        },
         process.env.JWT_SECRET,
         {expiresIn:"1d"}
     )
